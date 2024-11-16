@@ -369,7 +369,7 @@ class Page
     {
         // Update config language to the new setted value
         if (isset($_POST['language'])) {
-            Functions::setCurrentLanguage($_POST['language']);
+            Functions::setCurrentLanguage($_POST['language'], false);
             Functions::redirect(SYSTEM_ROOT . DIRECTORY_SEPARATOR);
         }
 
