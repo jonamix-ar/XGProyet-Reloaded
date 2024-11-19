@@ -384,6 +384,8 @@ class AllianceController extends BaseController
                     $this->user['user_id']
                 );
 
+				$this->sendApplyNotification($request['text']);
+
                 Functions::message($this->langs->line('al_request_confirmation_message'), 'game.php?page=alliance', 3);
             }
         }
@@ -1492,5 +1494,58 @@ class AllianceController extends BaseController
         }
 
         return $kick_user . $change_rank;
+    }
+
+    /**
+     * Send new apply notification to members who have permission to see
+     *
+     * @param string $request_text  Text of the apply
+     *
+     * @return void
+     */
+    private function sendApplyNotification($request_text)
+    {
+		// send message to owner of Alliance
+		$owner_id = $this->alliance->getCurrentAlliance()->getAllianceOwner();
+		$request_message = str_replace(
+			['%u', '%s'],
+			[$this->user['user_name'], $request_text],
+			$this->langs->line('al_request_message')
+		);
+		Functions::sendMessage(
+			$owner_id,
+			0,
+			'',
+			3,
+			$this->alliance->getCurrentAlliance()->getAllianceTag(),
+			$this->langs->line('al_request_subject'),
+			$request_message
+		);
+
+		// send messages to other members
+        $ranks = $this->alliance->getCurrentAllianceRankObject();
+        $list_of_ranks = $ranks->getAllRanksAsArray();
+
+        if (is_array($list_of_ranks)) {
+            foreach ($list_of_ranks as $id => $rank) {
+                if ($rank['rights'][AllianceRanks::APPLICATION_MANAGEMENT] OR $rank['rights'][AllianceRanks::APPLICATIONS]) {
+					$members = $this->allianceModel->getAllianceMembersByIdAndRankId(
+						$this->getAllianceId(),
+						$id
+					);
+					foreach($members AS $member) {
+						Functions::sendMessage(
+							$member['user_id'],
+							0,
+							'',
+							3,
+							$this->alliance->getCurrentAlliance()->getAllianceTag(),
+							$this->langs->line('al_request_subject'),
+							$request_message
+						);
+					}
+				}
+            }
+        }
     }
 }

@@ -18,6 +18,8 @@ $lang = [
     'al_request_deleted' => 'Tu solicitud a la alianza %s ha sido borrada. <br/>Ahora puedes escribir una nueva solicitud o crear tu propia alianza.',
     'al_request_wait_message' => 'Ya has enviado una solicitud a la alianza %s. <br/>Por favor, espera hasta que recibas una respuesta o borra la solicitud.',
     'al_delete_request' => 'Borrar solicitud',
+	'al_request_subject' => 'Nueva solicitud',
+	'al_request_message' => '<strong>%u</strong> ha enviado una solicitud a su alianza. Puedes procesar la solicitud en la página de la alianza. <a href="game.php?page=alliance&mode=admin&edit=requests">Ver solicitudes</a><br/><br/>Mensaje:<br/>%s',
     'al_founder_cant_leave_alliance' => 'El fundador no puede abandonar la alianza.',
     'al_leave_sucess' => 'Abandonaste la alianza %s con éxito.',
     'al_do_you_really_want_to_go_out' => '¿Realmente deseas salir de la alianza %s?',
