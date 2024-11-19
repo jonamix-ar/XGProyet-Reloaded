@@ -50,5 +50,6 @@ $lang = [
     'mk_user_existing_email' => 'Email already exists<br>',
     'mk_user_existing_planet' => 'Planet already exists<br>',
     'mk_user_invalid_password' => 'Invalid password. It must contain more than 4 characters<br>',
-    'mk_user_added' => 'User added with the password: %s',
+    'mk_user_invalid_auth_level' => 'Invalid level. The user level must be lower than yours<br>',
+	'mk_user_added' => 'User added with the password: %s',
 ];

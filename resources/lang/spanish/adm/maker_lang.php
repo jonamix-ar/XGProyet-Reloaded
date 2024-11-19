@@ -50,5 +50,6 @@ $lang = [
     'mk_user_existing_email' => 'El email ingresado ya existe<br>',
     'mk_user_existing_planet' => 'El planeta ingresado ya existe<br>',
     'mk_user_invalid_password' => 'La clave ingresada no es válida. Debe tener 4 caracteres como mínimo.<br>',
-    'mk_user_added' => 'Usuario agregado con la clave: %s',
+    'mk_user_invalid_auth_level' => 'Nivel no válido. El nivel de usuario debe ser inferior al tuyo.<br>',
+	'mk_user_added' => 'Usuario agregado con la clave: %s',
 ];

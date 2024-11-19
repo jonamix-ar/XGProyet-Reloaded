@@ -66,7 +66,7 @@ class AdministrationLib
      */
     public static function authorization(string $module, int $user_level)
     {
-        $cleaned_module_name = strtolower(substr(strrchr($module, '\\'), 1));
+        $cleaned_module_name = substr(strtolower(substr(strrchr($module, '\\'), 1)), 0, -10);
         $permissions = new Permissions(Functions::readConfig('admin_permissions'));
 
         return $permissions->isAccessAllowed($cleaned_module_name, $user_level);

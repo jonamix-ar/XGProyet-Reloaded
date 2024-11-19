@@ -126,6 +126,11 @@ class MakerController extends BaseController
                 }
             }
 
+			if ($auth >= $this->user['user_authlevel']) {
+                $error .= $this->langs->line('mk_user_invalid_auth_level');
+                $i++;
+            }
+
             if ($i == 0) {
                 $this->makerModel->createNewUser($name, $email, $auth, $pass, $galaxy, $system, $planet);
 
@@ -355,6 +360,7 @@ class MakerController extends BaseController
         ];
 
         foreach ($ranks as $rank_id) {
+	        if($this->user['user_authlevel'] <= $rank_id) continue;
             $user_levels[] = [
                 'id' => $rank_id,
                 'name' => $this->langs->language['user_level'][$rank_id],
