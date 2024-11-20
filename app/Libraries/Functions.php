@@ -420,20 +420,18 @@ abstract class Functions
      *
      * @return void
      */
-    public static function setCurrentLanguage($lang = '', $installed = true)
+    public static function setCurrentLanguage($lang = '')
     {
         // force english
         if (!in_array($lang, self::getLanguagesList())) {
             $lang = 'english';
         }
 
-		if ($installed) {
-			$db = new Database();
+		$db = new Database();
 
-			// set the user language reading the config file
-			if ($db != null && $db->testConnection() && !isset($_COOKIE['current_lang'])) {
-				self::updateConfig('lang', $lang);
-			}
+		// set the user language reading the config file
+		if (!IN_INSTALL && $db != null && $db->testConnection() && !isset($_COOKIE['current_lang'])) {
+			self::updateConfig('lang', $lang);
 		}
 
         setcookie('current_lang', $lang);
