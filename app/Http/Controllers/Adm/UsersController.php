@@ -556,7 +556,7 @@ class UsersController extends BaseController
         $this->usersModel->saveTechnologies($_POST, $this->_id);
 
         // points rebuild
-        $this->_stats->rebuildPoints($this->_id, 0, 'research');
+        $this->_stats->rebuildPoints($this->_id, 'research');
 
         // alert
         $this->_alert_info = $this->langs->line('us_all_ok_message');
@@ -619,7 +619,7 @@ class UsersController extends BaseController
         $this->usersModel->saveBuildings($_POST, $id_get);
 
         // points rebuild
-        $this->_stats->rebuildPoints($this->_id, $id_get, 'buildings');
+        $this->_stats->rebuildPoints($this->_id, 'buildings');
 
         // alert
         $this->_alert_info = $this->langs->line('us_all_ok_message');
@@ -642,7 +642,7 @@ class UsersController extends BaseController
         $this->usersModel->saveShips($_POST, $id_get);
 
         // points rebuild
-        $this->_stats->rebuildPoints($this->_id, $id_get, 'ships');
+        $this->_stats->rebuildPoints($this->_id, 'ships');
 
         // alert
         $this->_alert_info = $this->langs->line('us_all_ok_message');
@@ -665,7 +665,7 @@ class UsersController extends BaseController
         $this->usersModel->saveDefenses($_POST, $id_get);
 
         // points rebuild
-        $this->_stats->rebuildPoints($this->_id, $id_get, 'defenses');
+        $this->_stats->rebuildPoints($this->_id, 'defenses');
 
         // alert
         $this->_alert_info = $this->langs->line('us_all_ok_message');

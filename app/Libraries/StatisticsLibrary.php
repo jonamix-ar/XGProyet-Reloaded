@@ -51,12 +51,11 @@ class StatisticsLibrary
      * Rebuild the user points for the current planet and specific structure type.
      *
      * @param int    $user_id   The user ID
-     * @param int    $planet_id The planet ID
      * @param string $what      The structure type (buildings|defenses|research|ships)
      *
      * @return boolean
      */
-    public function rebuildPoints($user_id, $planet_id, $what)
+    public function rebuildPoints($user_id, $what)
     {
         if (!in_array('{xgp_prefix}' . $what, [BUILDINGS, DEFENSES, RESEARCH, SHIPS])) {
             return false;
