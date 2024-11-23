@@ -129,9 +129,11 @@ class StatisticsLibrary
     /**
      * makeStats
      *
+	 * @param bool $recalculate		If true, the function will recalculate all planets and research points before make statistics.
+	 *
      * @return array
      */
-    public function makeStats()
+    public function makeStats($recalculate = false)
     {
         // INITIAL TIME
         $mtime = microtime();
@@ -144,7 +146,7 @@ class StatisticsLibrary
         $result['initial_memory'] = [round(memory_get_usage() / 1024, 1), round(memory_get_usage(1) / 1024, 1)];
 
         // MAKE STATISTICS FOR USERS
-        self::makeUserRank();
+        self::makeUserRank($recalculate);
 
         // MAKE STATISTICS FOR ALLIANCE
         self::makeAllyRank();
@@ -166,9 +168,11 @@ class StatisticsLibrary
     /**
      * makeUserRank
      *
+	 * @param bool $recalculate		If true, the function will recalculate all planets and research points before make statistics.
+	 *
      * @return void
      */
-    private function makeUserRank()
+    private function makeUserRank($recalculate = false)
     {
         // GET ALL DATA FROM THE USERS TO UPDATE
         $all_stats_data = $this->statisticsLibraryModel->getAllUserStatsData();
@@ -180,6 +184,14 @@ class StatisticsLibrary
 
         // BUILD ALL THE ARRAYS
         foreach ($all_stats_data as $CurUser) {
+			// REBUILD POINTS IF REBUILD FROM ADMIN PANEL
+			if($recalculate) {
+				self::rebuildPoints($CurUser['user_statistic_user_id'], 'research');
+				self::rebuildPoints($CurUser['user_statistic_user_id'], 'buildings');
+				self::rebuildPoints($CurUser['user_statistic_user_id'], 'defenses');
+				self::rebuildPoints($CurUser['user_statistic_user_id'], 'ships');
+			}
+
             $tech['old_rank'][$CurUser['user_statistic_user_id']] = $CurUser['user_statistic_technology_rank'];
             $tech['points'][$CurUser['user_statistic_user_id']] = $CurUser['user_statistic_technology_points'];
 

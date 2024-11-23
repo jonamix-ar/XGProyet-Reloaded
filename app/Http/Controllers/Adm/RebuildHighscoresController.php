@@ -47,7 +47,7 @@ class RebuildHighscoresController extends BaseController
     private function runAction(): void
     {
         $stObject = new Statistics();
-        $this->result = $stObject->makeStats();
+        $this->result = $stObject->makeStats(true);
 
         Functions::updateConfig('stat_last_update', $this->result['stats_time']);
     }
